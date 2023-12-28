@@ -69,8 +69,8 @@ ALTER TABLE productos
 ADD PRIMARY KEY (ID_PRODUCTO);
 
 ALTER TABLE sucursales
-RENAME COLUMN ï»¿ID TO ID,
-ADD PRIMARY KEY (id);
+RENAME COLUMN ï»¿ID TO IdSucursal,
+ADD PRIMARY KEY (IdSucursal);
 
 ALTER TABLE empleados
 ADD PRIMARY KEY (ID_empleado);
@@ -89,6 +89,9 @@ ADD PRIMARY KEY (IdTipoGasto);
 
 ALTER TABLE ventas
 ADD PRIMARY KEY (IdVenta);
+
+ALTER TABLE empleados
+ADD PRIMARY KEY (IdEmpleado);
 
 -- como no me deja ya que hay varios registros con la misma "ID_empleado" creo una nueva
 -- columna que sea un primary key autoincremental
@@ -121,7 +124,7 @@ REFERENCES clientes(ID);
 ALTER TABLE ventas
 ADD CONSTRAINT fk_sucursal
 FOREIGN KEY (IdSucursal)
-REFERENCES sucursales(ID);
+REFERENCES sucursales(IdSucursal);
 
 ALTER TABLE ventas
 ADD CONSTRAINT fk_producto
@@ -131,7 +134,7 @@ REFERENCES productos(ID_PRODUCTO);
 ALTER TABLE gasto
 ADD CONSTRAINT fk_gasto_sucursal
 FOREIGN KEY (IdSucursal)
-REFERENCES sucursales(ID);
+REFERENCES sucursales(IdSucursal);
 
 ALTER TABLE gasto
 ADD CONSTRAINT fk_tipo_de_gasto
@@ -147,3 +150,13 @@ ALTER TABLE compra
 ADD CONSTRAINT fk_proveedor
 FOREIGN KEY (IdProveedor)
 REFERENCES proveedores(IDProveedor);
+
+ALTER TABLE ventas
+ADD CONSTRAINT fk_empleados
+FOREIGN KEY (IdEmpleado)
+REFERENCES empleados(IdEmpleado);
+
+ALTER TABLE empleados
+ADD CONSTRAINT fk_empleado_sucursal
+FOREIGN KEY (IdSucursal)
+REFERENCES sucursales(IdSucursal);
